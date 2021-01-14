@@ -4,3 +4,39 @@
 4. Make new files names,
 5. Prompts for verification about filenames,
 6. Makes new folder, copying files there with new names
+
+Specyfikacja programu do zmiany nazw plików zgodnie z wymaganiami BookBeat
+
+Cel programu:
+Program ma służyć do automatycznej zmiany nazw plików w folderze według opisanego algorytmu.
+Dane wejściowe- pliki (stare nazwy plików):
+Folder zawierający wyłącznie pliki *.MP3.
+Nazwy plików mp3 ZAWSZE utworzone są według schematu:
+<Kolejny numer pliku><jakieś info>.mp3
+Gdzie:
+<Kolejny numer pliku> -  numeracja zaczynająca się od 0 lub 1, lub innej cyfry. Numery kolejnych plików są zawsze kolejno rosnące o 1. Zawsze zawiera zera wiodące. Numer pliku wraz z zerami zawsze ma stałą długość dla danego audiobooka (zazwyczaj 2 lub 3 cyfry).
+<jakieś info> – Zazwyczaj tytuł książki, nazwa rozdziału, dodatkowy numer części rozdziału itd. Może zawierać małe/duże litery, cyfry, znaki podkreślenia, spacje, polskie znaki, nawiasy.
+Przykłady
+ 
+ 
+Dane wejściowe – folder
+Nazwa folderu danego audiobooka to numer ISBN (również EAN) audiobooka. Jest to 13 cyfrowy kod ISBN, przykład: 9788366155749
+Algorytm zmiany nazw
+W wyniku działania programu, mają zostać zmienione nazwy wszystkich plików w podanym folderze.
+
+Nowa nazwa pliku:
+<ISBN>_<kolejny numer>_<liczba plików>.mp3
+Gdzie:
+<ISBN> - to nazwa folderu z plikami.
+<kolejny numer> - kolejny numer pliku zgodny z numerem ze starej nazwy.
+<liczba plików> - stała wartość – liczba plików w folderze.
+
+Przykład zawartości folderu zawierającego 18 plików ze zmienionymi nazwami.
+ 
+
+
+Inne info
+- Program nie musi wykonywać kopii plików.
+- Program powinien być bardzo prosty w obsłudze – np. podaj w linii poleceń ścieżkę do folderu który ma być zmieniony (lub samą jego nazwę jeśli działamy w folderze bieżącym – w Windows jest takie pojęcie jak folder bieżący).
+- Program powinien obsługiwać podstawowe błędy i zwracać informację o statusie wykonania: 
+OK / błąd – jakieś info o przyczynie.
