@@ -1,0 +1,6 @@
+1. Loads files names from folder,
+2. Filters only audio files,
+3. Sorting files in numerical order, (checks for numers if no numers, return exeption),
+4. Make new files names,
+5. Prompts for verification about filenames,
+6. Makes new folder, copying files there with new names
