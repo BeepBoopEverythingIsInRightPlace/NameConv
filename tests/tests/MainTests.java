@@ -1,10 +1,10 @@
 package tests;
 
 import com.company.FileNameRefactor;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class MainTests {
 
     @Test (expected = FileNotFoundException.class)
     public void throwExeptionIfNoFiles() throws FileNotFoundException {
-        FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\9788366155749");
+        FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudiobooksEmpytFolder\\9788366155800");
         fileNameRefactor.getSortedFilenames();
     }
 
@@ -90,23 +90,69 @@ public class MainTests {
     }
 
     @Test
-    public void getBookBeatNamesFromNamesTest() throws FileNotFoundException {
+    public void getBookBeatNamesFromNamesCukierekTest() throws FileNotFoundException {
         FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\9788366155749");
         List<String> fileNames;
         fileNames = fileNameRefactor.getSortedFilenames();
         List<String> newFileNames = fileNameRefactor.getBookBeatNamesFrom(fileNames);
 
         List<String> expectedFileNames = new ArrayList<>();
-        expectedFileNames.add("9788366155749_001_009");
-        expectedFileNames.add("9788366155749_002_009");
-        expectedFileNames.add("9788366155749_003_009");
-        expectedFileNames.add("9788366155749_004_009");
-        expectedFileNames.add("9788366155749_005_009");
-        expectedFileNames.add("9788366155749_006_009");
-        expectedFileNames.add("9788366155749_007_009");
-        expectedFileNames.add("9788366155749_008_009");
-        expectedFileNames.add("9788366155749_009_009");
+        expectedFileNames.add("9788366155749_1_9.mp3");
+        expectedFileNames.add("9788366155749_2_9.mp3");
+        expectedFileNames.add("9788366155749_3_9.mp3");
+        expectedFileNames.add("9788366155749_4_9.mp3");
+        expectedFileNames.add("9788366155749_5_9.mp3");
+        expectedFileNames.add("9788366155749_6_9.mp3");
+        expectedFileNames.add("9788366155749_7_9.mp3");
+        expectedFileNames.add("9788366155749_8_9.mp3");
+        expectedFileNames.add("9788366155749_9_9.mp3");
 
         assertEquals(expectedFileNames, newFileNames);
     }
+
+    @Test
+    public void getBookBeatNamesFromNiewinniNamesTest() throws FileNotFoundException {
+        FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\9788366155800");
+        List<String> fileNames;
+        fileNames = fileNameRefactor.getSortedFilenames();
+        List<String> newFileNames = fileNameRefactor.getBookBeatNamesFrom(fileNames);
+
+        List<String> expectedFileNames = new ArrayList<>();
+        expectedFileNames.add("9788366155800_01_15.mp3");
+        expectedFileNames.add("9788366155800_02_15.mp3");
+        expectedFileNames.add("9788366155800_03_15.mp3");
+        expectedFileNames.add("9788366155800_04_15.mp3");
+        expectedFileNames.add("9788366155800_05_15.mp3");
+        expectedFileNames.add("9788366155800_06_15.mp3");
+        expectedFileNames.add("9788366155800_07_15.mp3");
+        expectedFileNames.add("9788366155800_08_15.mp3");
+        expectedFileNames.add("9788366155800_09_15.mp3");
+        expectedFileNames.add("9788366155800_10_15.mp3");
+        expectedFileNames.add("9788366155800_11_15.mp3");
+        expectedFileNames.add("9788366155800_12_15.mp3");
+        expectedFileNames.add("9788366155800_13_15.mp3");
+        expectedFileNames.add("9788366155800_14_15.mp3");
+        expectedFileNames.add("9788366155800_15_15.mp3");
+
+        assertEquals(expectedFileNames, newFileNames);
+    }
+
+    @Ignore
+    @Test
+    public void changeNamesInFolderTest() throws FileNotFoundException {
+        FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudioBoksChangeNames\\9788366155800");
+        List<String> fileNames;
+        fileNames = fileNameRefactor.getSortedFilenames();
+        List<String> expectedFileNames = fileNameRefactor.getBookBeatNamesFrom(fileNames);
+        fileNameRefactor.changeNamesInFolder(expectedFileNames);
+
+        List<String> accualFileNames = new ArrayList<>();
+        File folder = new File("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudioBoksChangeNames\\9788366155800");
+        for (File file : folder.listFiles()) {
+            accualFileNames.add(file.getName());
+        }
+        assertEquals(expectedFileNames, accualFileNames);
+    }
+
+
 }
