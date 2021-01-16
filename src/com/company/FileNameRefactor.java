@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -60,6 +61,19 @@ public class FileNameRefactor {
     }
 
 
+    public void changeNamesInFolder(List<String> newFileNames) throws IOException {
+        Iterator<String> fileName = newFileNames.iterator();
+        for (File file : folder.listFiles()) {
+            File newFile = new File(filePath.concat("\\").concat(fileName.next()));
+            if (newFile.exists())
+                throw new IOException("This files already exist");
+            boolean success = file.renameTo(newFile);
+
+            if (!success)
+                throw new IOException("Something went wrong during file renaming");
+        }
+    }
+
     private void exeptionsIfBad(File folder) throws FileNotFoundException {
         if (!folder.exists())
             throw new NullPointerException("No such directory");
@@ -94,14 +108,5 @@ public class FileNameRefactor {
         }
         // check sum
         return sum % 10 == 0;
-    }
-
-    //todo
-    public void changeNamesInFolder(List<String> newFileNames) {
-        Iterator<String> fileName = newFileNames.iterator();
-        for (File file : folder.listFiles()) {
-            File newFile = new File(filePath.concat("\\").concat(fileName.next()));
-            boolean success = file.renameTo(newFile);
-        }
     }
 }

@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,15 +30,15 @@ public class MainTests {
         expectedFileNames.add("8   Cz4 Jak się masz Cukierku  Tradycja.mp3");
         expectedFileNames.add("9   Cz4 Jak się masz Cukierku  Nieoczekiwane skutki czatowania.mp3");
 
-        List<String> accualNames = null;
+        List<String> actualNames = null;
         try {
             fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudiobooksToTest\\9788366155749");
-            accualNames = fileNameRefactor.getSortedFilenames();
+            actualNames = fileNameRefactor.getSortedFilenames();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        assertEquals(expectedFileNames, accualNames);
+        assertEquals(expectedFileNames, actualNames);
     }
 
 
@@ -139,7 +140,7 @@ public class MainTests {
 
     @Ignore
     @Test
-    public void changeNamesInFolderTest() throws FileNotFoundException {
+    public void changeNamesInFolderTest() throws IOException {
         FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudioBoksChangeNames\\9788366155800");
         List<String> fileNames;
         fileNames = fileNameRefactor.getSortedFilenames();
@@ -154,5 +155,18 @@ public class MainTests {
         assertEquals(expectedFileNames, accualFileNames);
     }
 
-
+    @Ignore
+    @Test (expected = IOException.class)
+    public void changeNamesInFolderExceptionsTest() throws IOException {
+        try {
+            changeNamesInFolderTest();
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+        FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudioBoksChangeNames\\9788366155800");
+        List<String> fileNames;
+        fileNames = fileNameRefactor.getSortedFilenames();
+        List<String> expectedFileNames = fileNameRefactor.getBookBeatNamesFrom(fileNames);
+        fileNameRefactor.changeNamesInFolder(expectedFileNames);
+    }
 }

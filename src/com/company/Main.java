@@ -1,26 +1,52 @@
 package com.company;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
+import java.util.MissingFormatArgumentException;
 
 public class Main {
+    static String path;
 
     public static void main(String[] args) {
-        List<String> filenames = new ArrayList<>();
-        FileNameRefactor fileNameRefactor;
+
         try {
-            fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudiobooksToTest\\9788366155749");
-            filenames = fileNameRefactor.getSortedFilenames();
+            checkPathArgument(args);
+
+        } catch (MissingFormatArgumentException e) {
+            System.err.println("Brak ścieżki");
+        }
+
+        try {
+            changeFilenamesToBookBeat();
+
+            System.out.println("Zmieniono nazwy plików.");
         } catch (FileNotFoundException e) {
-            //e.printStackTrace();
             System.err.println("Brak plików w folderze.");
+        } catch (IOException e) {
+            System.err.println("Błąd przy zapisie nowych nazw plików");
+            System.err.println(e.getMessage());
         } catch (IllegalArgumentException ee){
             System.err.println("Podana ścieżka prowadzi do pliku, nie do folderu");
         } catch (NullPointerException eee) {
             System.err.println("Nie ma takiego folderu");
         }
 
-        System.out.println(filenames);
+    }
+
+    private static void changeFilenamesToBookBeat() throws IOException {
+        List<String> filenames;
+        FileNameRefactor fileNameRefactor;
+
+        fileNameRefactor = new FileNameRefactor(path);
+        filenames = fileNameRefactor.getSortedFilenames();
+        filenames = fileNameRefactor.getBookBeatNamesFrom(filenames);
+        fileNameRefactor.changeNamesInFolder(filenames);
+    }
+
+    private static void checkPathArgument(String[] args) throws MissingFormatArgumentException {
+        if (args.length < 1)
+            throw new MissingFormatArgumentException("Brak ścieżki");
+        path = args[0];
     }
 }
