@@ -14,22 +14,22 @@ public class Main {
             checkPathArgument(args);
 
         } catch (MissingFormatArgumentException e) {
-            System.err.println("Brak ścieżki");
+            System.err.println("Path missing");
         }
 
         try {
             changeFilenamesToBookBeat();
 
-            System.out.println("Zmieniono nazwy plików.");
+            System.out.println("Files names has been changed.");
         } catch (FileNotFoundException e) {
-            System.err.println("Brak plików w folderze.");
+            System.err.println("No files in folder.");
         } catch (IOException e) {
-            System.err.println("Błąd przy zapisie nowych nazw plików");
+            System.err.println("Something went wrong during saving files names");
             System.err.println(e.getMessage());
         } catch (IllegalArgumentException ee){
-            System.err.println("Podana ścieżka prowadzi do pliku, nie do folderu");
+            System.err.println("The path leads fo file, not to folder.");
         } catch (NullPointerException eee) {
-            System.err.println("Nie ma takiego folderu");
+            System.err.println("No such folder.");
         }
 
     }
@@ -46,7 +46,7 @@ public class Main {
 
     private static void checkPathArgument(String[] args) throws MissingFormatArgumentException {
         if (args.length < 1)
-            throw new MissingFormatArgumentException("Brak ścieżki");
+            throw new MissingFormatArgumentException("Path missing");
         path = args[0];
     }
 }

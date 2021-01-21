@@ -24,11 +24,15 @@ public class FileNameRefactor {
         this.filesExtension = extension.substring(extension.length() - 4); //get .mp3 from first file
     }
 
-    public List<String> getSortedFilenames() {
+    public List<String> getSortedFilenames() throws IOException {
         List<String> fileNames = Arrays.asList(folder.list().clone());
+        if (alreadyExist(fileNames))
+            throw new IOException("Those files already exist");
+
         fileNames.sort(String::compareTo);
         return fileNames;
     }
+
 
     public List<String> getBookBeatNamesFrom(List<String> fileNames) {
         List<String> fileNumbers = new ArrayList<>();
@@ -87,6 +91,11 @@ public class FileNameRefactor {
         File[] filesInFolder = folder.listFiles();
         if (filesInFolder == null || filesInFolder.length < 1)
             throw new FileNotFoundException("No files in folder");
+
+    }
+
+    private boolean alreadyExist(List<String> fileNames) {
+        return fileNames.get(0).substring(0,13).equals(folder.getName());
     }
 
     private boolean isISBN13(String number) {

@@ -1,6 +1,7 @@
 package tests;
 
 import com.company.FileNameRefactor;
+import com.company.Main;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -15,6 +16,11 @@ import static org.junit.Assert.assertEquals;
 public class MainTests {
 
     FileNameRefactor fileNameRefactor;
+
+    @Test
+    public void runTest() {
+        Main.main(new String[]{"C:\\Users\\artak\\Exercism\\java\\NameConv\\AudioBoksChangeNames\\9788366155800"});
+    }
 
     //@Ignore
     @Test
@@ -34,8 +40,9 @@ public class MainTests {
         try {
             fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudiobooksToTest\\9788366155749");
             actualNames = fileNameRefactor.getSortedFilenames();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
+            e.getMessage();
         }
 
         assertEquals(expectedFileNames, actualNames);
@@ -46,14 +53,22 @@ public class MainTests {
     @Test (expected = FileNotFoundException.class)
     public void throwExeptionIfNoFiles() throws FileNotFoundException {
         FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\AudiobooksEmpytFolder\\9788366155800");
-        fileNameRefactor.getSortedFilenames();
+        try {
+            fileNameRefactor.getSortedFilenames();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void throwExeptionIfNotADriedcotry() {
         try {
             FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\README");
-            fileNameRefactor.getSortedFilenames();
+            try {
+                fileNameRefactor.getSortedFilenames();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -63,7 +78,11 @@ public class MainTests {
     public void throwExceptionIfNoDirectoryFound() throws NullPointerException {
         try {
             FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\NotADirectory");
-            fileNameRefactor.getSortedFilenames();
+            try {
+                fileNameRefactor.getSortedFilenames();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -93,8 +112,12 @@ public class MainTests {
     @Test
     public void getBookBeatNamesFromNamesCukierekTest() throws FileNotFoundException {
         FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\9788366155749");
-        List<String> fileNames;
-        fileNames = fileNameRefactor.getSortedFilenames();
+        List<String> fileNames = null;
+        try {
+            fileNames = fileNameRefactor.getSortedFilenames();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         List<String> newFileNames = fileNameRefactor.getBookBeatNamesFrom(fileNames);
 
         List<String> expectedFileNames = new ArrayList<>();
@@ -114,8 +137,12 @@ public class MainTests {
     @Test
     public void getBookBeatNamesFromNiewinniNamesTest() throws FileNotFoundException {
         FileNameRefactor fileNameRefactor = new FileNameRefactor("C:\\Users\\artak\\Exercism\\java\\NameConv\\9788366155800");
-        List<String> fileNames;
-        fileNames = fileNameRefactor.getSortedFilenames();
+        List<String> fileNames = null;
+        try {
+            fileNames = fileNameRefactor.getSortedFilenames();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         List<String> newFileNames = fileNameRefactor.getBookBeatNamesFrom(fileNames);
 
         List<String> expectedFileNames = new ArrayList<>();
