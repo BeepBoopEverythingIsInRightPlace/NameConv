@@ -1,0 +1,13 @@
+Instalation of NameConverter program
+
+1. Instal java JDK SE Development Kit (Not normal java),
+2. Make sure your Java JDK Path is first in environmental variables (win > search > Edit environmental variables > environmental variables > System Variables > Path > EDIT),
+3. In Bath file change the NameConverterPath to your path to NameConv.jar
+
+
+Using Program
+
+1. Put the bath file in desired location amongst other folders that have ISBN in name and files inside.
+2. Run bath file from cmd and put folder ISBN name as an argument
+
+=====================================================================================================================================================================
