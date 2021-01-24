@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NameConv:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NameConv_jar</output-path>
+    <root id="archive" name="NameConv.jar">
+      <element id="module-output" name="NameConv" />
+    </root>
+  </artifact>
+</component>
